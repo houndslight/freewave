@@ -1,0 +1,40 @@
+name: Freewave Android Build
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'App version'
+        required: true
+        default: '1.0.0'
+jobs:
+  build-android:
+    name: 🌊 Freewave Android Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Freewave repository
+        uses: actions/checkout@v3
+      - name: Setup Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Build Freewave Android app
+        run: flutter build apk --release
+      - name: Verify APK file exists
+        run: ls -lh build/app/outputs/flutter-apk/
+      - name: Upload Freewave APK to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: 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
+          file: build/app/outputs/flutter-apk/app-release.apk
+          asset_name: Freewave-${{ github.event.inputs.version }}.apk
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Freewave Android app version ${{ github.event.inputs.version }}"
