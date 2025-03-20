@@ -47,32 +47,35 @@ class MusicHomePage extends StatelessWidget {
                   InkWell(
                     onTap: () => print('Logo tapped'),
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 36,
+                      height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.black, width: 2),
                       ),
-                      child: Icon(Icons.explore, color: Colors.black),
+                      child: Icon(Icons.explore, color: Colors.black, size: 18),
                     ),
                   ),
                   
-                  // Middle navigation buttons
-                  Row(
-                    children: [
-                      _buildNavButton('songs'),
-                      SizedBox(width: 8),
-                      _buildNavButton('artists'),
-                      SizedBox(width: 8),
-                      _buildNavButton('albums'),
-                    ],
+                  // Middle navigation buttons - smaller and centered
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildNavButton('songs'),
+                        SizedBox(width: 6),
+                        _buildNavButton('artists'),
+                        SizedBox(width: 6),
+                        _buildNavButton('albums'),
+                      ],
+                    ),
                   ),
                   
                   // Right side buttons
                   Row(
                     children: [
                       _buildIconButton(Icons.pause),
-                      SizedBox(width: 8),
+                      SizedBox(width: 6),
                       _buildIconButton(Icons.headphones),
                     ],
                   ),
@@ -213,7 +216,7 @@ class MusicHomePage extends StatelessWidget {
     return InkWell(
       onTap: () => print('$text tapped'),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(20),
@@ -224,6 +227,7 @@ class MusicHomePage extends StatelessWidget {
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontFamily: 'PlanetKosmos',
+            fontSize: 12,
           ),
         ),
       ),
@@ -234,12 +238,12 @@ class MusicHomePage extends StatelessWidget {
     return InkWell(
       onTap: () => print('Icon tapped'),
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(6),
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Icon(icon, color: Colors.white),
+        child: Icon(icon, color: Colors.white, size: 18),
       ),
     );
   }
