@@ -49,13 +49,3 @@ jobs:
         
       - name: Verify IPA file exists
         run: ls -lh build/ios/iphoneos/
-      
-      - name: Upload Freewave IPA to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.RELEASE_TOKEN }}
-          file: build/ios/iphoneos/Freewave.ipa
-          asset_name: Freewave-${{ github.event.inputs.version }}.ipa
-          tag: v${{ github.event.inputs.version }}
-          overwrite: true
-          body: "Freewave iOS app version ${{ github.event.inputs.version }}"
