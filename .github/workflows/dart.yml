@@ -6,6 +6,11 @@ on:
         description: 'App version'
         required: true
         default: '1.0.0'
+
+# Adding explicit permissions
+permissions:
+  contents: write
+
 jobs:
   build-ios:
     name: 🌊 Freewave iOS Build
@@ -13,34 +18,42 @@ jobs:
     steps:
       - name: Checkout Freewave repository
         uses: actions/checkout@v3
+        
       - name: Setup Flutter environment
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
+          
       - name: Install Flutter dependencies
         run: flutter pub get
+        
       - name: Update CocoaPods repository
         run: pod repo update
         working-directory: ios
+        
       - name: Build Freewave iOS app
         run: flutter build ios --release --no-codesign
+      
       - name: Create Payload directory
         run: mkdir -p Payload
         working-directory: build/ios/iphoneos
+        
       - name: Move app to Payload directory
         run: mv Runner.app Payload/
         working-directory: build/ios/iphoneos
+        
       - name: Create IPA file
         run: zip -qq -r Freewave.ipa Payload
         working-directory: build/ios/iphoneos
+        
       - name: Verify IPA file exists
         run: ls -lh build/ios/iphoneos/
       
       - name: Upload Freewave IPA to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.RELEASE_TOKEN }}
           file: build/ios/iphoneos/Freewave.ipa
           asset_name: Freewave-${{ github.event.inputs.version }}.ipa
           tag: v${{ github.event.inputs.version }}
