@@ -1,11 +1,11 @@
-# FreeWave
+# freewave
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Flutter-blue.svg)
 
 ## Overview
 
-FreeWave is a cross-platform application built using Flutter. It aims to provide a seamless experience across multiple platforms, including:
+freewave is a cross-platform application built using Flutter. It aims to provide a seamless experience across multiple platforms, including:
 
 - **Android**
 - **iOS**
