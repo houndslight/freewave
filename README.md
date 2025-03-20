@@ -26,7 +26,7 @@ freewave is a cross-platform application built using Flutter. It aims to provide
 
 ## Getting Started
 
-To get started with FreeWave, follow these steps:
+To get started with freewave, follow these steps:
 
 1. **Clone the repository**:
 
