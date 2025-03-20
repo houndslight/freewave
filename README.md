@@ -9,10 +9,6 @@ FreeWave is a cross-platform application built using Flutter. It aims to provide
 
 - **Android**
 - **iOS**
-- **Linux**
-- **macOS**
-- **Web**
-- **Windows**
 
 ## Features
 
