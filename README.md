@@ -10,7 +10,11 @@ freewave is a cross-platform application built using Flutter. It aims to provide
 - **Android**
 - **iOS**
 
-## GUI Showcase![gui-showcase](https://github.com/user-attachments/assets/59d4387e-9141-429e-8bb0-5d0f4a8ee0ec)
+## GUI Showcase
+
+- **What I have so far.**
+
+![gui-showcase](https://github.com/user-attachments/assets/59d4387e-9141-429e-8bb0-5d0f4a8ee0ec)
 
 
 
