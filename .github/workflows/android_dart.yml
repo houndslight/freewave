@@ -106,7 +106,7 @@ jobs:
           body: "Freewave Android app version ${{ github.event.inputs.version }} (${{ github.event.inputs.flavor }})"
 
       - name: Upload artifact to workflow
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: freewave-${{ github.event.inputs.version }}-${{ github.event.inputs.flavor }}-${{ github.event.inputs.build_type }}
           path: build/app/outputs/flutter-apk/app-${{ github.event.inputs.flavor }}-${{ github.event.inputs.build_type }}.apk
