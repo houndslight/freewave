@@ -12,7 +12,7 @@ FreeWave is a cross-platform application built using Flutter. It aims to provide
 
 ## Features
 
-- **Cross-Platform Compatibility**: Write once, run anywhere.
+- **Cross-Platform Compatibility**: Write once, run on any phone.
 - **Responsive Design**: Adapts to various screen sizes and orientations.
 - **High Performance**: Optimized for speed and efficiency.
 
