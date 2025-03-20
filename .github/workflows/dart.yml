@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout Freewave repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for proper git operations
         
       - name: Setup Flutter environment
         uses: subosito/flutter-action@v2
@@ -58,6 +60,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git pull origin main --rebase
           git add builds/Freewave-${{ github.event.inputs.version }}.ipa
           git commit -m "Add iOS build v${{ github.event.inputs.version }}"
           git push
