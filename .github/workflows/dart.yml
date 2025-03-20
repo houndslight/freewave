@@ -6,11 +6,9 @@ on:
         description: 'App version'
         required: true
         default: '1.0.0'
-
 # Adding explicit permissions
 permissions:
   contents: write
-
 jobs:
   build-ios:
     name: 🌊 Freewave iOS Build
@@ -49,3 +47,17 @@ jobs:
         
       - name: Verify IPA file exists
         run: ls -lh build/ios/iphoneos/
+        
+      - name: Create builds directory
+        run: mkdir -p builds
+        
+      - name: Copy IPA to builds directory
+        run: cp build/ios/iphoneos/Freewave.ipa builds/Freewave-${{ github.event.inputs.version }}.ipa
+        
+      - name: Commit and push IPA file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add builds/Freewave-${{ github.event.inputs.version }}.ipa
+          git commit -m "Add iOS build v${{ github.event.inputs.version }}"
+          git push
