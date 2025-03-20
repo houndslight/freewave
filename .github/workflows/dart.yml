@@ -1,0 +1,52 @@
+name: Freewave iOS Build
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'App version'
+        required: true
+        default: '1.0.0'
+jobs:
+  build-ios:
+    name: 🌊 Freewave iOS Build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Freewave repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+          
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      
+      - name: Update CocoaPods repository
+        run: pod repo update
+        working-directory: ios
+        
+      - name: Build Freewave iOS app
+        run: flutter build ios --release --no-codesign
+        
+      - name: Create Payload directory
+        run: mkdir Payload
+        working-directory: build/ios/iphoneos
+        
+      - name: Move app to Payload directory
+        run: mv Runner.app/ Payload
+        working-directory: build/ios/iphoneos
+        
+      - name: Create IPA file
+        run: zip -qq -r -9 Freewave.ipa Payload
+        working-directory: build/ios/iphoneos
+        
+      - name: Upload Freewave IPA to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/ios/iphoneos/Freewave.ipa
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Freewave iOS app version ${{ github.event.inputs.version }}"
